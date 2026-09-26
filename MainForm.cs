@@ -74,10 +74,11 @@ public sealed class MainForm : Form
         _log.Clear();
         try
         {
+            Log("Selected: " + string.Join(", ", _picked));
             using var set = DiscSet.Open(_picked, Log);
             Log($"{set.Title}: {set.Discs.Count} disc(s), {Describe(set.Kind)}");
             _status.Text = set.Kind is DiscKind.D2000Kit or DiscKind.LinuxPartimage ? "Ready." : "This disc cannot be restored by this tool (see log).";
-            if (string.IsNullOrEmpty(_out.Text))
+            if (set.Kind is DiscKind.D2000Kit or DiscKind.LinuxPartimage && string.IsNullOrEmpty(_out.Text))
                 _out.Text = Path.Combine(Path.GetDirectoryName(_picked[0])!, Safe(set.Title) + ".img");
         }
         catch (Exception ex) { Log("Error: " + ex.Message); _status.Text = ex.Message; }

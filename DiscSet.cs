@@ -89,8 +89,11 @@ public sealed class DiscSet : IDisposable
         }
         if (kind != DiscKind.D2000Kit)
         {
-            set.Discs.Add(first);
-            return set;
+            // Not restorable: name it by its file. DISK.ID can't be trusted there (the "fixed"
+            // MAXX 2000 upgrade disc 1 carries the 2K Plus update disc's label).
+            var other = new DiscSet { Kind = kind, Title = Path.GetFileNameWithoutExtension(first.Path) };
+            other.Discs.Add(first);
+            return other;
         }
         var found = new Dictionary<int, IsoReader>();
         int count = id?.of ?? 1;
