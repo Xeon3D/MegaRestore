@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>MegaRestore</AssemblyName>
+    <RootNamespace>MegaRestore</RootNamespace>
+    <Version>1.0.0</Version>
+    <InvariantGlobalization>true</InvariantGlobalization>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Factory ROM-DOS boot code, extracted by scripts/p10-extract-bootcode.py (Docs/10). -->
+    <EmbeddedResource Include="boot\factory-mbr.bin" LogicalName="factory-mbr.bin" />
+    <EmbeddedResource Include="boot\factory-vbr.bin" LogicalName="factory-vbr.bin" />
+  </ItemGroup>
+
+</Project>
